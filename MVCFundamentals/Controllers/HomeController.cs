@@ -11,7 +11,7 @@ using MVCFundamentals.Models;
 using System.Web.UI.WebControls.Expressions;
 
 namespace MVCFundamentals.Controllers
-{
+{ 
     public class HomeController : Controller
     {
         private sampleEntities db = new sampleEntities();
