@@ -14,6 +14,8 @@ namespace MVCFundamentals.Models
     
     public partial class Employee
     {
+        internal object employeesIDsToDelete;
+
         public int ID { get; set; }
         public string Name { get; set; }
         public string Gender { get; set; }

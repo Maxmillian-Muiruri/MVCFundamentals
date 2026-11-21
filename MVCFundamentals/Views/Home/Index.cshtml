@@ -1,0 +1,26 @@
+﻿@model IEnumerable<MVCFundamentals.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Delete Multiple Data</h2>
+
+@using (Html.BeginForm("Delete", "Home", FormMethod.Post))
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @Html.EditorForModel()
+        </tbody>
+    </table>
+
+    <input type="submit" value="Delete Selected" />
+}
