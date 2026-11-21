@@ -11,7 +11,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Select</th>
+                <th><input type="checkbox" id="checkAll" /> Select</th>
                 <th>Name</th>
                 <th>Gender</th>
                 <th>Email</th>
@@ -22,5 +22,31 @@
         </tbody>
     </table>
 
-    <input type="submit" value="Delete Selected" />
+    <input type="submit" value="Delete Selected" id="deleteBtn" />
 }
+
+<script src="~/Scripts/jquery-3.7.0.min.js"></script>
+<script>
+    $(function () {
+        $("#checkAll").click(function () {
+            $("input[name='employeesIDsToDelete']").prop("checked", this.checked);
+        });
+
+        $("input[name='employeesIDsToDelete']").click(function () {
+            var all = $("input[name='employeesIDsToDelete']").length;
+            var checked = $("input[name='employeesIDsToDelete']:checked").length;
+            $("#checkAll").prop("checked", all == checked);
+        });
+
+        $("#deleteBtn").click(function () {
+            var count = $("input[name='employeesIDsToDelete']:checked").length;
+
+            if (count == 0) {
+                alert("No rows are selected for deletion");
+                return false; // prevents the form from being submitted
+            } else {
+                return confirm(count + " row(s) will be deleted");
+            }
+        });
+    });
+</script>
