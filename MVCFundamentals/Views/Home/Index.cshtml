@@ -1,36 +1,66 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "student";
+
+    var options = new AjaxOptions()
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "DivContainer",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "DivSpinnerLoading",   // shows the spinner while loading
+        OnBegin = "clearContainer"                // clears the old table when a click starts
+    };
 }
+
+<style>
+    #DivSpinnerLoading {
+        display: none; /* the Ajax script shows/hides it */
+        text-align: center;
+        padding: 40px 0;
+    }
+
+        #DivSpinnerLoading img {
+            width: 80px; /* make the spinner bigger or smaller here */
+            height: 80px;
+        }
+
+    #DivContainer {
+        min-height: 200px; /* keeps the layout from jumping */
+    }
+
+    .filter-links a {
+        margin-right: 6px;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .filter-links span {
+        color: #999;
+        margin-right: 6px;
+    }
+</style>
+
+<p class="display-1">Students Details</p>
+
+<div class="filter-links mb-3">
+    @Ajax.ActionLink("All", "All", options)
+    <span>|</span>
+    @Ajax.ActionLink("Top5", "Top5", options)
+    <span>|</span>
+    @Ajax.ActionLink("Bottom5", "Bottom5", options)
+</div>
+
+<div id="DivSpinnerLoading">
+    <img src="@Url.Content("~/image/spinner.gif")" alt="Loading..." />
+</div>
+
+<div id="DivContainer">
+    @Html.Action("All")
+</div>
+
 <script src="~/Scripts/jquery-3.7.0.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<p class="display-1">Students Details</p>
-<div>
-@Ajax.ActionLink("All", "All", new AjaxOptions()
-{
-    HttpMethod = "GET",
-    UpdateTargetId = "DivContainer",
-    InsertionMode = InsertionMode.Replace
-})
-
-<span>| </span>
-
-@Ajax.ActionLink("Top5", "Top5", new AjaxOptions()
-{
-    HttpMethod = "GET",
-    UpdateTargetId = "DivContainer",
-    InsertionMode = InsertionMode.Replace
-})
-
-<span>| </span>
-
-@Ajax.ActionLink("Bottom5", "Bottom5", new AjaxOptions()
-{
-    HttpMethod = "GET",
-    UpdateTargetId = "DivContainer",
-    InsertionMode = InsertionMode.Replace
-})
-    </div>
-
-<div id="DivContainer"></div>
-
+<script>
+    function clearContainer() {
+        $("#DivContainer").empty();
+    }
+</script>
