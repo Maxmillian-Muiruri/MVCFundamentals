@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "student";
+}
+<script src="~/Scripts/jquery-3.7.0.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<p class="display-1">Students Details</p>
+<div>
+@Ajax.ActionLink("All", "All", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "DivContainer",
+    InsertionMode = InsertionMode.Replace
+})
+
+<span>| </span>
+
+@Ajax.ActionLink("Top5", "Top5", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "DivContainer",
+    InsertionMode = InsertionMode.Replace
+})
+
+<span>| </span>
+
+@Ajax.ActionLink("Bottom5", "Bottom5", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "DivContainer",
+    InsertionMode = InsertionMode.Replace
+})
+    </div>
+
+<div id="DivContainer"></div>
+
